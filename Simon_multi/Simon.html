@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simon multiplayer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="simon.css" />
+  </head>
+  <body>
+    <div class="homepage">
+      <h1>SIMON GAME</h1>
+      <div class="homepageinp">
+        <input type="text" placeholder="Player1" id="player1" class="inps" />
+        <input type="text" placeholder="Player2" id="player2" class="inps" />
+      </div>
+      <div class="homepagetimer">
+        <p class="timerp">Timer</p>
+        <div class="timebox">
+          <div class="time">1:00</div>
+          <div class="time">3:00</div>
+          <div class="time">5:00</div>
+          <div class="time">No time</div>
+        </div>
+      </div>
+      <div class="rules">
+        <p class="rulespara">Rules</p>
+        <ul>
+          <li>Follow the pattern</li>
+          <li>First to solve more wins</li>
+          <li>You get three chances</li>
+        </ul>
+      </div>
+      <div class="startbtn">
+        <button class="homepage-startbtn">Start</button>
+      </div>
+    </div>
+
+    <main></main>
+    <script src="simon.js"></script>
+  </body>
+</html>
