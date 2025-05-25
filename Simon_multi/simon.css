@@ -314,6 +314,9 @@ main .footer {
 .flashgreen {
   background-color: lightgreen;
 }
+.flashred {
+  background-color: red;
+}
 .selected {
   border: 3px solid yellow;
 }
