@@ -4,16 +4,25 @@ let homepage = document.querySelector(".homepage");
 let homestartbtn = document.querySelector(".homepage-startbtn");
 let main = document.querySelector("main");
 HomeTimerbtnborder();
-let timerVal = 0;
-homepage.classList.add("DisplayNone"); //remove homepage
-// main.classList.add("DisplayNone");
+let clockstatus = true;
+let clockdisable = document.querySelector(".time");
+// homepage.classList.add("DisplayNone"); //!remove homepage
+main.classList.add("DisplayNone");
 homestartbtn.addEventListener("click", () => {
   if (player1.value != "" && player2.value != "") {
     if (HomeTimerbtnval() == "selected") {
       homepage.classList.add("DisplayNone");
+      let selected = document.querySelector(".selected");
+      timeval = selected.getAttribute("value");
+      if (timeval == "-1") {
+        clockstatus = false;
+        clockdisable.classList.add("DisplayNone");
+      }
+      let beforetime = parseInt(timeval) + 1;
+      clock.innerText = `${beforetime}:00`;
       setTimeout(() => {
         main.classList.remove("DisplayNone");
-        // gameSection();
+        gameSection();
       }, 250);
     }
   }
@@ -34,14 +43,12 @@ function HomeTimerbtnval() {
   for (time of timebtnsafter) {
     let att = time.getAttribute("class").split(" ");
     if (att[1] == "selected") {
-      let btn = document.querySelector(`.${att[1]}`);
-      timerVal = btn.getAttribute("value");
       return att[1];
     }
   }
 }
 //? Homepage code end
-gameSection();
+// gameSection();
 let body = document.querySelector("body");
 let presskey = document.querySelector(".keyToStart");
 let player1_gameseries = [];
@@ -65,12 +72,14 @@ const legalkeys1 = ["1", "2", "3", "4"];
 const legalkeys2 = ["9", "8", "0", "-"];
 function gameSection() {
   let body = document.querySelector("body");
-  body.addEventListener("keydown", () => {
-    presskey.classList.add("DisplayNone");
-    if (start == false) {
+  body.addEventListener("keydown", (ev) => {
+    console.log(ev.code);
+    if (ev.code == "Space") {
+      presskey.classList.add("DisplayNone");
       levelup();
-      clockTime();
-      start = true;
+      if (clockstatus == true) {
+        clockTime();
+      }
     }
   });
 }
@@ -89,6 +98,7 @@ function flashred(btn) {
   setTimeout(() => {
     btn.classList.remove("flashred");
   }, 250);
+  removehearts(btn);
 }
 function player1Game() {
   let idx = Math.floor(Math.random() * 4);
@@ -137,7 +147,6 @@ function player1_test() {
       for (let i = 0; i < player1_gameseries.length; i++) {
         if (player1_gameseries[i] == player1_series[i]) {
           if (i == player1_gameseries.length - 1) {
-            console.log("hi");
             setTimeout(() => {
               levelup();
             }, 500);
@@ -181,4 +190,24 @@ function player2_test() {
 }
 // Clock
 let clock = document.querySelector("#time");
-function clockTime() {}
+function clockTime() {
+  let min = timeval;
+  let sec = 59;
+  let id1 = setInterval(() => {
+    clock.innerText = `${min}:${String(sec).padStart(2, "0")}`;
+    if (min == 0 && sec == 0) {
+      min = 0;
+      sec = 0;
+      clearInterval(id1);
+    } else if (sec == 0) {
+      min--;
+      sec = 59;
+    } else {
+      sec--;
+    }
+  }, 500);
+}
+// PlayerHearts
+function removehearts(btn) {
+  console.log(btn);
+}
