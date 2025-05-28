@@ -73,7 +73,6 @@ const legalkeys2 = ["9", "8", "0", "-"];
 function gameSection() {
   let body = document.querySelector("body");
   body.addEventListener("keydown", (ev) => {
-    console.log(ev.code);
     if (ev.code == "Space") {
       presskey.classList.add("DisplayNone");
       levelup();
@@ -101,6 +100,7 @@ function flashred(btn) {
   removehearts(btn);
 }
 function player1Game() {
+  player1_series = [];
   let idx = Math.floor(Math.random() * 4);
   let btncolor = player1_idx[idx];
   let btnw = document.querySelector(`.${btncolor}`);
@@ -123,6 +123,7 @@ body.addEventListener("keydown", (ev) => {
 });
 
 function player2Game() {
+  player2_series = [];
   let idx = Math.floor(Math.random() * 4);
   let btncolor = player2_idx[idx];
   let btnw = document.querySelector(`.${btncolor}`);
@@ -142,50 +143,33 @@ body.addEventListener("keydown", (ev) => {
 });
 
 function player1_test() {
-  if (player1_gameseries != "" && player1Game != "") {
-    if (player1_gameseries.length === player1_series.length) {
-      for (let i = 0; i < player1_gameseries.length; i++) {
-        if (player1_gameseries[i] == player1_series[i]) {
-          if (i == player1_gameseries.length - 1) {
-            setTimeout(() => {
-              levelup();
-            }, 500);
-          }
-        } else if (player1_gameseries[i] !== player1_series[i]) {
-          let bt = document.querySelector("main .gamesection .mainplayer1 ");
-          flashred(bt);
-        }
-      }
-    } else {
-      let bt = document.querySelector(
-        "main .gamesection .mainplayer1.gameone "
-      );
-      flashred(bt);
+  let idx = player1_series.length - 1;
+  if (player1_series[idx] === player1_gameseries[idx]) {
+    if (player1_series.length === player1_gameseries.length) {
+      setTimeout(player1Game, 500);
     }
+  } else {
+    let red = document.querySelector(".gameone");
+    flashred(red);
+
+    player1_gameseries = [];
+    player1_series = [];
+    setTimeout(player1Game, 500);
   }
 }
 function player2_test() {
-  if (player2_gameseries != "" && player2Game != "") {
-    if (player2_gameseries.length === player2_series.length) {
-      for (let i = 0; i < player1_gameseries.length; i++) {
-        if (player2_gameseries[i] == player2_series[i]) {
-          if (i == player2_gameseries.length - 1) {
-            console.log("hi");
-            setTimeout(() => {
-              levelup();
-            }, 500);
-          }
-        } else if (player2_gameseries[i] !== player2_series[i]) {
-          let bt = document.querySelector(
-            "main .gamesection .mainplayer1.gametwo"
-          );
-          flashred(bt);
-        }
-      }
-    } else {
-      let bt = document.querySelector("main .gamesection .mainplayer1.gametwo");
-      flashred(bt);
+  let idx = player2_series.length - 1;
+  if (player2_series[idx] === player2_gameseries[idx]) {
+    if (player2_series.length === player2_gameseries.length) {
+      setTimeout(player2Game, 500);
     }
+  } else {
+    let red = document.querySelector(".gametwo");
+    flashred(red);
+
+    player2_gameseries = [];
+    player2_series = [];
+    setTimeout(player2Game, 500);
   }
 }
 // Clock
