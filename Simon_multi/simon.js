@@ -10,6 +10,7 @@ let clockdisable = document.querySelector(".time");
 main.classList.add("DisplayNone");
 homestartbtn.addEventListener("click", () => {
   if (player1.value != "" && player2.value != "") {
+    players_Gamenames();
     if (HomeTimerbtnval() == "selected") {
       homepage.classList.add("DisplayNone");
       let selected = document.querySelector(".selected");
@@ -75,6 +76,7 @@ function gameSection() {
   body.addEventListener("keydown", (ev) => {
     if (ev.code == "Space") {
       presskey.classList.add("DisplayNone");
+      start = true;
       levelup();
       if (clockstatus == true) {
         clockTime();
@@ -97,7 +99,6 @@ function flashred(btn) {
   setTimeout(() => {
     btn.classList.remove("flashred");
   }, 250);
-  removehearts(btn);
 }
 function player1Game() {
   player1_series = [];
@@ -112,12 +113,14 @@ function blinkbtnuser() {
 }
 
 body.addEventListener("keydown", (ev) => {
-  for (key of legalkeys1) {
-    if (ev.key == key) {
-      let btn = document.querySelector(`.${player_keys[key]}`);
-      flashgreen(btn);
-      player1_series.push(btn.innerText);
-      player1_test();
+  if (start == true) {
+    for (key of legalkeys1) {
+      if (ev.key == key) {
+        let btn = document.querySelector(`.${player_keys[key]}`);
+        flashgreen(btn);
+        player1_series.push(btn.innerText);
+        player1_test();
+      }
     }
   }
 });
@@ -132,12 +135,14 @@ function player2Game() {
 }
 
 body.addEventListener("keydown", (ev) => {
-  for (key of legalkeys2) {
-    if (ev.key == key) {
-      let btn1 = document.querySelector(`.${player_keys[key]}`);
-      flashgreen(btn1);
-      player2_series.push(btn1.innerText);
-      player2_test();
+  if (start == true) {
+    for (key of legalkeys2) {
+      if (ev.key == key) {
+        let btn1 = document.querySelector(`.${player_keys[key]}`);
+        flashgreen(btn1);
+        player2_series.push(btn1.innerText);
+        player2_test();
+      }
     }
   }
 });
@@ -151,10 +156,10 @@ function player1_test() {
   } else {
     let red = document.querySelector(".gameone");
     flashred(red);
-
     player1_gameseries = [];
     player1_series = [];
     setTimeout(player1Game, 500);
+    removehearts1();
   }
 }
 function player2_test() {
@@ -166,10 +171,10 @@ function player2_test() {
   } else {
     let red = document.querySelector(".gametwo");
     flashred(red);
-
     player2_gameseries = [];
     player2_series = [];
     setTimeout(player2Game, 500);
+    removehearts2();
   }
 }
 // Clock
@@ -192,6 +197,42 @@ function clockTime() {
   }, 500);
 }
 // PlayerHearts
-function removehearts(btn) {
-  console.log(btn);
+let player1_hearts = document.querySelectorAll(".heart1");
+let player2_hearts = document.querySelectorAll(".heart2");
+let player1_removedhearts = 0;
+let player2_removedhearts = 0;
+let gameover1 = document.querySelector(".gameover1");
+let gameover2 = document.querySelector(".gameover2");
+gameover1.classList.add("DisplayNone");
+gameover2.classList.add("DisplayNone");
+function removehearts1() {
+  player1_hearts[player1_removedhearts].classList.add("DisplayNone");
+  player1_removedhearts++;
+  if (player1_removedhearts == 3) {
+    let disablebtn = document.querySelectorAll(".mainbox1");
+    disablebtns(disablebtn);
+    gameover1.classList.remove("DisplayNone");
+  }
+}
+function removehearts2() {
+  player2_hearts[player2_removedhearts].classList.add("DisplayNone");
+  player2_removedhearts++;
+  if (player2_removedhearts == 3) {
+    let disablebtn = document.querySelectorAll(".mainbox2");
+    disablebtns(disablebtn);
+    gameover2.classList.remove("DisplayNone");
+  }
+}
+
+function disablebtns(btns) {
+  btns.forEach((el) => {
+    el.classList.add("DisplayNone");
+  });
+}
+// Playernames
+let player1name = document.getElementById("player1_gamename");
+let player2name = document.getElementById("player2_gamename");
+function players_Gamenames() {
+  player1name.innerText = `${player1.value}`;
+  player2name.innerText = `${player2.value}`;
 }
