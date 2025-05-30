@@ -235,7 +235,6 @@ main .footer {
   display: flex;
   flex-direction: column;
   color: #adf1d2;
-  display: none;
 }
 .result h1 {
   text-align: center;

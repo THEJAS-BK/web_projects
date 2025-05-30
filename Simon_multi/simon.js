@@ -157,8 +157,7 @@ function player1_test() {
     let red = document.querySelector(".gameone");
     flashred(red);
     player1_gameseries = [];
-    player1_series = [];
-    setTimeout(player1Game, 500);
+    setTimeout(player1Game, 1000);
     removehearts1();
   }
 }
@@ -172,7 +171,6 @@ function player2_test() {
     let red = document.querySelector(".gametwo");
     flashred(red);
     player2_gameseries = [];
-    player2_series = [];
     setTimeout(player2Game, 500);
     removehearts2();
   }
@@ -236,3 +234,11 @@ function players_Gamenames() {
   player1name.innerText = `${player1.value}`;
   player2name.innerText = `${player2.value}`;
 }
+// Game End
+let endbtn = document.querySelector(".endbtn");
+let endpage = document.querySelector(".result");
+endpage.classList.add("DisplayNone");
+endbtn.addEventListener("click", () => {
+  main.classList.add("DisplayNone");
+  endpage.classList.remove("DisplayNone");
+});
