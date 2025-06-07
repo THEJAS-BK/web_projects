@@ -244,7 +244,7 @@ main .footer {
   letter-spacing: 0.25rem;
 }
 .result .playerres {
-  height: 50%;
+  height: 35%;
   display: flex;
   width: 100%;
 }
@@ -261,14 +261,10 @@ main .footer {
   font-size: 3rem;
   margin-top: 2rem;
 }
-.resplayer1 .respattern,
-.resplayer2 .respattern {
-  margin-top: 4rem;
-  letter-spacing: 0.1rem;
-}
+
 .resplayer1 .solved,
 .resplayer2 .solved {
-  margin-top: 0.75rem;
+  margin-top: 0.9rem;
   font-size: 2rem;
 }
 .result .playerhearts {
@@ -277,26 +273,25 @@ main .footer {
   display: flex;
   font-size: 2rem;
   color: #fe6d73;
-  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 .playerhearts .reshearts {
-  width: 30%;
-  margin-left: 11rem;
+  width: 50%;
   letter-spacing: 0.25rem;
+  text-align: center;
 }
 .foot {
-  flex: 1;
+  height: 20%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.home,
-.new_game {
+.home {
   padding: 0.9rem 2rem;
   background-color: #fe6d73;
   border: none;
   border-radius: 2rem;
-  margin-right: 3rem;
   color: white;
   letter-spacing: 0.2rem;
 }

@@ -49,7 +49,6 @@ function HomeTimerbtnval() {
   }
 }
 //? Homepage code end
-// gameSection();
 let body = document.querySelector("body");
 let presskey = document.querySelector(".keyToStart");
 let player1_gameseries = [];
@@ -71,6 +70,7 @@ let player_keys = {
 };
 const legalkeys1 = ["1", "2", "3", "4"];
 const legalkeys2 = ["9", "8", "0", "-"];
+
 function gameSection() {
   let body = document.querySelector("body");
   body.addEventListener("keydown", (ev) => {
@@ -146,12 +146,19 @@ body.addEventListener("keydown", (ev) => {
     }
   }
 });
-
+let player1_solvpattern = 0;
+let player2_solvpattern = 0;
+let curpattern1 = 0;
+let curpattern2 = 0;
 function player1_test() {
   let idx = player1_series.length - 1;
   if (player1_series[idx] === player1_gameseries[idx]) {
     if (player1_series.length === player1_gameseries.length) {
       setTimeout(player1Game, 500);
+      curpattern1++;
+      if (player1_solvpattern < curpattern1) {
+        player1_solvpattern = curpattern1;
+      }
     }
   } else {
     let red = document.querySelector(".gameone");
@@ -159,6 +166,7 @@ function player1_test() {
     player1_gameseries = [];
     setTimeout(player1Game, 1000);
     removehearts1();
+    curpattern1 = 0;
   }
 }
 function player2_test() {
@@ -166,6 +174,10 @@ function player2_test() {
   if (player2_series[idx] === player2_gameseries[idx]) {
     if (player2_series.length === player2_gameseries.length) {
       setTimeout(player2Game, 500);
+      curpattern2++;
+      if (player2_solvpattern < curpattern2) {
+        player2_solvpattern = curpattern2;
+      }
     }
   } else {
     let red = document.querySelector(".gametwo");
@@ -173,6 +185,7 @@ function player2_test() {
     player2_gameseries = [];
     setTimeout(player2Game, 500);
     removehearts2();
+    curpattern2 = 0;
   }
 }
 // Clock
@@ -204,21 +217,25 @@ let gameover2 = document.querySelector(".gameover2");
 gameover1.classList.add("DisplayNone");
 gameover2.classList.add("DisplayNone");
 function removehearts1() {
-  player1_hearts[player1_removedhearts].classList.add("DisplayNone");
-  player1_removedhearts++;
-  if (player1_removedhearts == 3) {
-    let disablebtn = document.querySelectorAll(".mainbox1");
-    disablebtns(disablebtn);
-    gameover1.classList.remove("DisplayNone");
+  if (player1_removedhearts <= 3) {
+    player1_hearts[player1_removedhearts].classList.add("DisplayNone");
+    player1_removedhearts++;
+    if (player1_removedhearts == 3) {
+      let disablebtn = document.querySelectorAll(".mainbox1");
+      disablebtns(disablebtn);
+      gameover1.classList.remove("DisplayNone");
+    }
   }
 }
 function removehearts2() {
-  player2_hearts[player2_removedhearts].classList.add("DisplayNone");
-  player2_removedhearts++;
-  if (player2_removedhearts == 3) {
-    let disablebtn = document.querySelectorAll(".mainbox2");
-    disablebtns(disablebtn);
-    gameover2.classList.remove("DisplayNone");
+  if (player2_removedhearts <= 3) {
+    player2_hearts[player2_removedhearts].classList.add("DisplayNone");
+    player2_removedhearts++;
+    if (player2_removedhearts == 3) {
+      let disablebtn = document.querySelectorAll(".mainbox2");
+      disablebtns(disablebtn);
+      gameover2.classList.remove("DisplayNone");
+    }
   }
 }
 
@@ -236,9 +253,41 @@ function players_Gamenames() {
 }
 // Game End
 let endbtn = document.querySelector(".endbtn");
-let endpage = document.querySelector(".result");
-endpage.classList.add("DisplayNone");
+let result = document.querySelector(".result");
+let winnerName = document.querySelector(".winner");
+result.classList.add("DisplayNone");
 endbtn.addEventListener("click", () => {
   main.classList.add("DisplayNone");
-  endpage.classList.remove("DisplayNone");
+  result.classList.remove("DisplayNone");
+  checkwinner();
+});
+let player1resName = document.querySelector("#player1_resname");
+let player2resName = document.querySelector("#player2_resname");
+let player1resSolved = document.querySelector("#player1solved");
+let player2resSolved = document.querySelector("#player2solved");
+
+function checkwinner() {
+  if (player1_solvpattern > player2_solvpattern) {
+    winnerName.innerText = `${player1.value} Wins!!!`;
+  } else if (player1_solvpattern == player2_solvpattern) {
+    winnerName.innerText = "DRAW";
+  } else {
+    winnerName.innerText = `${player2.value}`;
+    player2_solvpattern;
+  }
+  player1resName.innerText = player1.value;
+  player2resName.innerText = player2.value;
+  player1resSolved.innerText = `${player1_solvpattern}`;
+  player2resSolved.innerText = `${player2_solvpattern}`;
+}
+// Homebtn
+
+let gohome = document.querySelector(".home");
+gohome.addEventListener("click", () => {
+  result.classList.add("DisplayNone");
+  homepage.classList.remove("DisplayNone");
+  player1_gameseries = [];
+  player2_gameseries = [];
+  start = false;
+  presskey.classList.remove("DisplayNone");
 });

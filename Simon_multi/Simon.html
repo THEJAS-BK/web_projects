@@ -23,7 +23,7 @@
   <body>
     <div class="homepage">
       <h1>SIMON GAME</h1>
-      <div class="homepageinp">
+      <div class="homepageinp ">
         <input type="text" placeholder="Player1" id="player1" class="inps" />
         <input type="text" placeholder="Player2" id="player2" class="inps" />
       </div>
@@ -107,16 +107,16 @@
       </div>
     </main>
     <div class="result">
-      <h1>Thejas Wins!!!</h1>
+      <h1 class="winner">Thejas Wins!!!</h1>
       <div class="playerres">
         <div class="resplayer1">
-          <p class="solved1">Thejas solved </p>
-          <p class="solved">6</p>
+          <p class="solved1"><span id="player1_resname">player1</span></p>
+          <p class="solved" id="player1solved">6</p>
 
         </div>
         <div class="resplayer2">
-          <p class="solved1">Thejas solved </p>
-          <p class="solved">6</p>
+          <p class="solved1"><span id="player2_resname">player2</span> </p>
+          <p class="solved" id="player2solved">6</p>
   
         </div>
       </div>
@@ -136,7 +136,7 @@
     </div>
      <div class="foot">
         <button class="home">Home</button>
-        <button class="new_game">New Game</button>
+  
       </div>
     <script src="simon.js"></script>
   </body>
