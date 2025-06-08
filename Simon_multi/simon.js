@@ -8,6 +8,8 @@ let clockstatus = true;
 let clockdisable = document.querySelector(".time");
 // homepage.classList.add("DisplayNone"); //!remove homepage
 main.classList.add("DisplayNone");
+let clockInterval = null;
+
 homestartbtn.addEventListener("click", () => {
   if (player1.value != "" && player2.value != "") {
     players_Gamenames();
@@ -18,9 +20,11 @@ homestartbtn.addEventListener("click", () => {
       if (timeval == "-1") {
         clockstatus = false;
         clockdisable.classList.add("DisplayNone");
+      } else {
+        clockstatus = true;
       }
-      let beforetime = parseInt(timeval) + 1;
-      clock.innerText = `${beforetime}:00`;
+      let beforetime = parseInt(timeval);
+      clock.innerText = `${beforetime}:59`;
       setTimeout(() => {
         main.classList.remove("DisplayNone");
         gameSection();
@@ -72,18 +76,20 @@ const legalkeys1 = ["1", "2", "3", "4"];
 const legalkeys2 = ["9", "8", "0", "-"];
 
 function gameSection() {
-  let body = document.querySelector("body");
-  body.addEventListener("keydown", (ev) => {
-    if (ev.code == "Space") {
-      presskey.classList.add("DisplayNone");
-      start = true;
-      levelup();
-      if (clockstatus == true) {
-        clockTime();
-      }
-    }
-  });
+  body.addEventListener("keydown", startGameOnce, { once: true });
 }
+
+function startGameOnce(ev) {
+  if (ev.code == "Space") {
+    presskey.classList.add("DisplayNone");
+    start = true;
+    levelup();
+    if (clockstatus == true) {
+      clockTime();
+    }
+  }
+}
+
 function levelup() {
   player1Game();
   player2Game();
@@ -191,22 +197,29 @@ function player2_test() {
 // Clock
 let clock = document.querySelector("#time");
 function clockTime() {
-  let min = timeval;
+  let min = parseInt(timeval);
   let sec = 59;
-  let id1 = setInterval(() => {
+
+  // Stop any previous interval
+  if (clockInterval) {
+    clearInterval(clockInterval);
+  }
+
+  clockInterval = setInterval(() => {
     clock.innerText = `${min}:${String(sec).padStart(2, "0")}`;
-    if (min == 0 && sec == 0) {
-      min = 0;
-      sec = 0;
-      clearInterval(id1);
-    } else if (sec == 0) {
+
+    if (min === 0 && sec === 0) {
+      clearInterval(clockInterval);
+      clockInterval = null;
+    } else if (sec === 0) {
       min--;
       sec = 59;
     } else {
       sec--;
     }
-  }, 500);
+  }, 1000);
 }
+
 // PlayerHearts
 let player1_hearts = document.querySelectorAll(".heart1");
 let player2_hearts = document.querySelectorAll(".heart2");
@@ -281,13 +294,23 @@ function checkwinner() {
   player2resSolved.innerText = `${player2_solvpattern}`;
 }
 // Homebtn
-
 let gohome = document.querySelector(".home");
+let remove_options = document.querySelectorAll(".hometime");
 gohome.addEventListener("click", () => {
+  remove_options.forEach((el) => {
+    el.classList.remove("selected");
+  });
   result.classList.add("DisplayNone");
   homepage.classList.remove("DisplayNone");
   player1_gameseries = [];
   player2_gameseries = [];
+  player1_series = [];
+  player2_series = [];
   start = false;
   presskey.classList.remove("DisplayNone");
+  clockstatus = true;
+  if (clockInterval) {
+    clearInterval(clockInterval);
+  }
+  clockInterval = null;
 });
