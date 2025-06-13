@@ -9,7 +9,10 @@ let clockdisable = document.querySelector(".time");
 // homepage.classList.add("DisplayNone"); //!remove homepage
 main.classList.add("DisplayNone");
 let clockInterval = null;
-
+let player1_box = document.querySelector(".box1");
+let player2_box = document.querySelector(".box2");
+let player1_num = 0;
+let player2_num = 0;
 homestartbtn.addEventListener("click", () => {
   if (player1.value != "" && player2.value != "") {
     players_Gamenames();
@@ -165,6 +168,7 @@ function player1_test() {
       if (player1_solvpattern < curpattern1) {
         player1_solvpattern = curpattern1;
       }
+      player1_centerboxes();
     }
   } else {
     let red = document.querySelector(".gameone");
@@ -173,6 +177,19 @@ function player1_test() {
     setTimeout(player1Game, 1000);
     removehearts1();
     curpattern1 = 0;
+    remove_centerboxes(player1_box);
+    player1_num = 0;
+    let allTempBtns = document.querySelectorAll(".mainbox1");
+    allTempBtns.forEach((el) => {
+      el.classList.add("DisplayNone");
+      setTimeout(() => {
+        if (player1_removedhearts != 3) {
+          allTempBtns.forEach((el) => {
+            el.classList.remove("DisplayNone");
+          });
+        }
+      }, 260);
+    });
   }
 }
 function player2_test() {
@@ -184,6 +201,7 @@ function player2_test() {
       if (player2_solvpattern < curpattern2) {
         player2_solvpattern = curpattern2;
       }
+      player2_centerboxes();
     }
   } else {
     let red = document.querySelector(".gametwo");
@@ -192,6 +210,20 @@ function player2_test() {
     setTimeout(player2Game, 500);
     removehearts2();
     curpattern2 = 0;
+    remove_centerboxes2(player2_box);
+    player2_num = 0;
+    let allTempBtns = document.querySelectorAll(".mainbox2");
+    player2_num = 0;
+    allTempBtns.forEach((el) => {
+      el.classList.add("DisplayNone");
+      setTimeout(() => {
+        if (player2_removedhearts != 3) {
+          allTempBtns.forEach((el) => {
+            el.classList.remove("DisplayNone");
+          });
+        }
+      }, 260);
+    });
   }
 }
 // Clock
@@ -199,12 +231,9 @@ let clock = document.querySelector("#time");
 function clockTime() {
   let min = parseInt(timeval);
   let sec = 59;
-
-  // Stop any previous interval
   if (clockInterval) {
     clearInterval(clockInterval);
   }
-
   clockInterval = setInterval(() => {
     clock.innerText = `${min}:${String(sec).padStart(2, "0")}`;
 
@@ -237,6 +266,10 @@ function removehearts1() {
       let disablebtn = document.querySelectorAll(".mainbox1");
       disablebtns(disablebtn);
       gameover1.classList.remove("DisplayNone");
+      allbtns = document.querySelectorAll("mainbox1");
+      allbtns.forEach((el) => {
+        el.classList.add("DisplayNone");
+      });
     }
   }
 }
@@ -248,6 +281,10 @@ function removehearts2() {
       let disablebtn = document.querySelectorAll(".mainbox2");
       disablebtns(disablebtn);
       gameover2.classList.remove("DisplayNone");
+      allbtns = document.querySelectorAll("mainbox1");
+      allbtns.forEach((el) => {
+        el.classList.add("DisplayNone");
+      });
     }
   }
 }
@@ -297,20 +334,65 @@ function checkwinner() {
 let gohome = document.querySelector(".home");
 let remove_options = document.querySelectorAll(".hometime");
 gohome.addEventListener("click", () => {
-  remove_options.forEach((el) => {
-    el.classList.remove("selected");
-  });
-  result.classList.add("DisplayNone");
-  homepage.classList.remove("DisplayNone");
-  player1_gameseries = [];
-  player2_gameseries = [];
-  player1_series = [];
-  player2_series = [];
-  start = false;
-  presskey.classList.remove("DisplayNone");
-  clockstatus = true;
-  if (clockInterval) {
-    clearInterval(clockInterval);
-  }
-  clockInterval = null;
+  location.reload();
 });
+
+// center line
+const boxColors = [
+  "#ccffcc",
+  "#99ff99",
+  "#66ff66", // Light Green
+  "#33cc33",
+  "#00cc00",
+  "#009900", // Bright Green
+  "#ccff66",
+  "#ccff33",
+  "#ccff00", // Yellow-Green
+  "#ffff66",
+  "#ffff33",
+  "#ffff00", // Yellow
+  "#ffcc66",
+  "#ffbb33",
+  "#ffaa00", // Light Orange
+  "#ff9933",
+  "#ff8800",
+  "#ff7700", // Orange
+  "#ff6666",
+  "#ff4444",
+  "#ff2222", // Light Red
+  "#ff0000",
+  "#cc0000",
+  "#990000",
+  "#660000", // Red
+];
+function player1_centerboxes() {
+  if (player1_num < 25) {
+    div = document.createElement("div");
+    div.style.backgroundColor = `${boxColors[player1_num]}`;
+    player1_num++;
+    div.classList.add("player1_centerbox");
+    player1_box.append(div);
+  }
+}
+function remove_centerboxes(box) {
+  allbtns = document.querySelectorAll(".player1_centerbox");
+  allbtns.forEach((el) => {
+    console.log(el);
+    box.removeChild(el);
+  });
+}
+function remove_centerboxes2(box) {
+  allbtns = document.querySelectorAll(".player2_centerbox");
+  allbtns.forEach((el) => {
+    box.removeChild(el);
+  });
+}
+function player2_centerboxes() {
+  if (player2_num < 25) {
+    div = document.createElement("div");
+    div.style.backgroundColor = `${boxColors[player2_num]}`;
+    player2_num++;
+    div.classList.add("player2_centerbox");
+    player2_box.append(div);
+  }
+}

@@ -169,6 +169,23 @@ main .gamesection .centerbox .box {
   background-color: black;
   width: 4%;
 }
+.centerbox .box1,
+.box2 {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: end;
+  align-items: end;
+}
+.player1_centerbox {
+  height: 5%;
+  width: 100%;
+  border: 2px solid black;
+}
+.player2_centerbox {
+  height: 5%;
+  width: 100%;
+  border: 2px solid black;
+}
 main .timeANDhearts {
   height: 10vh;
   display: flex;
