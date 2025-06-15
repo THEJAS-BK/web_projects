@@ -7,6 +7,8 @@ HomeTimerbtnborder();
 let clockstatus = true;
 let clockdisable = document.querySelector(".time");
 // homepage.classList.add("DisplayNone"); //!remove homepage
+let player1_gameover = false;
+let player2_gameover = false;
 main.classList.add("DisplayNone");
 let clockInterval = null;
 let player1_box = document.querySelector(".box1");
@@ -124,11 +126,13 @@ function blinkbtnuser() {
 body.addEventListener("keydown", (ev) => {
   if (start == true) {
     for (key of legalkeys1) {
-      if (ev.key == key) {
-        let btn = document.querySelector(`.${player_keys[key]}`);
-        flashgreen(btn);
-        player1_series.push(btn.innerText);
-        player1_test();
+      if (player1_gameover == false) {
+        if (ev.key == key) {
+          let btn = document.querySelector(`.${player_keys[key]}`);
+          flashgreen(btn);
+          player1_series.push(btn.innerText);
+          player1_test();
+        }
       }
     }
   }
@@ -146,11 +150,13 @@ function player2Game() {
 body.addEventListener("keydown", (ev) => {
   if (start == true) {
     for (key of legalkeys2) {
-      if (ev.key == key) {
-        let btn1 = document.querySelector(`.${player_keys[key]}`);
-        flashgreen(btn1);
-        player2_series.push(btn1.innerText);
-        player2_test();
+      if (player2_gameover == false) {
+        if (ev.key == key) {
+          let btn1 = document.querySelector(`.${player_keys[key]}`);
+          flashgreen(btn1);
+          player2_series.push(btn1.innerText);
+          player2_test();
+        }
       }
     }
   }
@@ -207,13 +213,12 @@ function player2_test() {
     let red = document.querySelector(".gametwo");
     flashred(red);
     player2_gameseries = [];
-    setTimeout(player2Game, 500);
+    setTimeout(player2Game, 1000);
     removehearts2();
     curpattern2 = 0;
     remove_centerboxes2(player2_box);
     player2_num = 0;
     let allTempBtns = document.querySelectorAll(".mainbox2");
-    player2_num = 0;
     allTempBtns.forEach((el) => {
       el.classList.add("DisplayNone");
       setTimeout(() => {
@@ -227,6 +232,7 @@ function player2_test() {
   }
 }
 // Clock
+let timeover = false;
 let clock = document.querySelector("#time");
 function clockTime() {
   let min = parseInt(timeval);
@@ -239,7 +245,15 @@ function clockTime() {
 
     if (min === 0 && sec === 0) {
       clearInterval(clockInterval);
+      timeover = true;
       clockInterval = null;
+      if (endbtnclicked !== true) {
+        if (timeover == true) {
+          main.classList.add("DisplayNone");
+          result.classList.remove("DisplayNone");
+          checkwinner();
+        }
+      }
     } else if (sec === 0) {
       min--;
       sec = 59;
@@ -263,6 +277,7 @@ function removehearts1() {
     player1_hearts[player1_removedhearts].classList.add("DisplayNone");
     player1_removedhearts++;
     if (player1_removedhearts == 3) {
+      player1_gameover = true;
       let disablebtn = document.querySelectorAll(".mainbox1");
       disablebtns(disablebtn);
       gameover1.classList.remove("DisplayNone");
@@ -278,6 +293,7 @@ function removehearts2() {
     player2_hearts[player2_removedhearts].classList.add("DisplayNone");
     player2_removedhearts++;
     if (player2_removedhearts == 3) {
+      player2_gameover = true;
       let disablebtn = document.querySelectorAll(".mainbox2");
       disablebtns(disablebtn);
       gameover2.classList.remove("DisplayNone");
@@ -302,6 +318,7 @@ function players_Gamenames() {
   player2name.innerText = `${player2.value}`;
 }
 // Game End
+let endbtnclicked = false;
 let endbtn = document.querySelector(".endbtn");
 let result = document.querySelector(".result");
 let winnerName = document.querySelector(".winner");
@@ -309,6 +326,7 @@ result.classList.add("DisplayNone");
 endbtn.addEventListener("click", () => {
   main.classList.add("DisplayNone");
   result.classList.remove("DisplayNone");
+  endbtnclicked = true;
   checkwinner();
 });
 let player1resName = document.querySelector("#player1_resname");
@@ -396,3 +414,4 @@ function player2_centerboxes() {
     player2_box.append(div);
   }
 }
+// TIme up
