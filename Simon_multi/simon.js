@@ -81,7 +81,7 @@ const legalkeys1 = ["1", "2", "3", "4"];
 const legalkeys2 = ["9", "8", "0", "-"];
 
 function gameSection() {
-  body.addEventListener("keydown", startGameOnce, { once: true });
+  body.addEventListener("keydown", startGameOnce);
 }
 
 function startGameOnce(ev) {
@@ -92,6 +92,7 @@ function startGameOnce(ev) {
     if (clockstatus == true) {
       clockTime();
     }
+    body.addEventListener("keydown", startGameOnce);
   }
 }
 
@@ -242,8 +243,12 @@ function clockTime() {
   }
   clockInterval = setInterval(() => {
     clock.innerText = `${min}:${String(sec).padStart(2, "0")}`;
-
-    if (min === 0 && sec === 0) {
+    if (player1_removedhearts === 3 && player2_removedhearts === 3) {
+      main.classList.add("DisplayNone");
+      result.classList.remove("DisplayNone");
+      endbtnclicked = true;
+      checkwinner();
+    } else if (min === 0 && sec === 0) {
       clearInterval(clockInterval);
       timeover = true;
       clockInterval = null;
@@ -414,4 +419,3 @@ function player2_centerboxes() {
     player2_box.append(div);
   }
 }
-// TIme up
