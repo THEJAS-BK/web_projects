@@ -6,7 +6,7 @@
 
 .homepage {
   height: 80vh;
-  width: 40%;
+  width: 50%;
   background-color: #227c9d;
   margin: 50px auto;
   display: flex;
@@ -24,15 +24,15 @@
 }
 .homepage .homepageinp {
   margin-top: 1rem;
-  height: 20%;
+  height: 40%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
 }
 .homepage .homepageinp .inps {
   font-size: 1.5rem;
-  width: 49%;
+  width: 100%;
   padding: 0.5rem 0;
   border: none;
   border-radius: 1rem;
@@ -43,44 +43,32 @@
 .homepage .homepagetimer {
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
-  padding: 1rem 0;
+  height: 30%;
+  margin-top: 1rem;
 }
 
 .homepage .homepagetimer .timerp {
-  font-size: 2rem;
+  width: 20%;
+  font-size: 140%;
   color: #c1ff72;
 }
 .homepage .homepagetimer .timebox {
   display: flex;
-  justify-content: center;
-  align-content: center;
+  width: 50%;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-left: 20%;
 }
 .hometime {
-  margin-left: 3rem;
   background-color: #17c3b2;
   align-content: center;
-  padding: 0 1rem;
   cursor: pointer;
   border-radius: 1rem;
-}
-.homepage .rules {
-  width: 57%;
-}
-.homepage .rules .rulespara {
-  line-height: 5rem;
-  font-size: 2rem;
-  flex: 1;
-  letter-spacing: 1px;
-  color: #c1ff72;
-  margin-top: 1rem;
-}
-.homepage .rules ul {
-  height: 70%;
-  line-height: 2rem;
-  font-size: 1.5rem;
-  margin-left: 1.4rem;
-  color: #c1ff72;
+  height: 2rem;
+  width: 4rem;
+  text-align: center;
 }
 .homepage .startbtn {
   margin-top: 2rem;
@@ -330,133 +318,26 @@ main .footer {
 .blur {
   filter: blur(5px);
 }
-@media (max-width: 1200px) {
-  main .gamesection .mainplayer1 .mainbox {
-    width: 40%;
-  }
-  main .gamesection .mainplayer1 {
-    gap: 1rem;
-  }
-  main .gamesection .centerbox {
-    width: 5%;
-  }
-}
-@media (max-width: 1100px) {
-  main .gamesection .mainplayer1 .mainbox {
-    width: 47%;
-  }
-}
-@media (max-width: 900px) {
+@media (max-width: 600px) {
   .homepage {
-    width: 60%;
-    display: flex;
+    width: 80%;
   }
-}
-@media (max-width: 1300px) {
   .hometime {
-    margin-left: 1rem;
-  }
-}
-@media (max-width: 700px) {
-  .homepage {
-    width: 70%;
-  }
-  .homepage .homepagetimer {
-    height: 12vh;
-    padding-left: 1rem;
-    margin-top: 0.25rem;
+    width: 30%;
     font-size: 0.75rem;
-    justify-content: start;
-    width: 100%;
-  }
-  .homepageinp {
-    height: 50vh;
-    flex-direction: column;
-    align-items: start;
-    gap: 0.5rem;
-  }
-  #player1 {
-    width: 100%;
-  }
-  #player2 {
-    width: 100%;
-  }
-  .timebox {
-    width: 100%;
-    font-size: 0.75rem;
-    text-align: center;
-  }
-  .homepage .rules .rulespara {
-    line-height: 1rem;
-    font-size: 1.5rem;
-    width: 100%;
-  }
-  .homepage .rules ul {
-    font-size: 1.25rem;
-    line-height: 2rem;
-  }
-}
-@media (max-width: 510px) {
-  .homepage {
-    width: 90%;
-  }
-}
-@media (max-width: 410px) {
-  .homepage .homepagetimer .timebox {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    gap: 0.2rem;
-  }
-  .homepage .homepagetimer .timerp {
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-  }
-  .homepage .homepagetimer {
-    height: 20vh;
-    margin-top: -1rem;
-    padding: 0;
-  }
-  .homepage .rules {
-    font-size: 0.24rem;
-    width: 100%;
-  }
-  .hometime {
-    height: 2.5rem;
-    width: 5rem;
-  }
-  .homepage .rules .rulespara {
-    margin-left: 1rem;
-  }
-  .homepage .rules .rulespara {
-    margin-top: -1rem;
-  }
-}
-@media (max-width: 290px) {
-  .hometime {
-    width: fit-content;
-  }
-  .homepage .homepagetimer .timebox {
-    width: 100%;
-    justify-content: flex-start;
-  }
-}
-@media (max-width: 250px) {
-  .homepage .homepagetimer .timebox {
-    gap: 0.125rem;
-  }
-  #notime {
-    font-size: 0.5rem;
-    padding: 0 0.85rem;
-  }
-  .hometime {
-    height: 20%;
-  }
-  .homepage .homepagetimer .timerp {
-    font-size: 1rem;
   }
 }
 .DisplayNone {
   display: none;
+}
+@media (max-width: 300px) {
+  .homepage {
+    width: 96%;
+  }
+  .homepage h1 {
+    font-size: 1.5rem;
+  }
+  .timerp {
+    font-size: 1rem !important;
+  }
 }
