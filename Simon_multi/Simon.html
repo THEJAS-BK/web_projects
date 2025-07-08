@@ -23,7 +23,7 @@
   <body>
     <div class="homepage">
       <h1>SIMON GAME</h1>
-      <div class="homepageinp ">
+      <div class="homepageinp">
         <input type="text" placeholder="Player1" id="player1" class="inps" />
         <input type="text" placeholder="Player2" id="player2" class="inps" />
       </div>
@@ -33,10 +33,12 @@
           <div class="hometime" type="button" value="0">1:00</div>
           <div class="hometime" type="button" value="2">3:00</div>
           <div class="hometime" type="button" value="4">5:00</div>
-          <div class="hometime" id="notime" type="button" value="-1">No time</div>
+          <div class="hometime" id="notime" type="button" value="-1">
+            No time
+          </div>
         </div>
       </div>
-     
+
       <div class="startbtn">
         <button class="homepage-startbtn">Start</button>
       </div>
@@ -44,9 +46,7 @@
 
     <main>
       <div class="keyToStart">
-        <div class="keyStart startmsg">
-          Press space key to start
-        </div>
+        <div class="keyStart startmsg">Press space key to start</div>
       </div>
       <div class="gamesection">
         <div class="mainplayer1 gameone">
@@ -60,17 +60,16 @@
           </div>
         </div>
         <div class="centerbox">
-          <div class="box1 box">
-          </div>
+          <div class="box1 box"></div>
           <div class="line"></div>
           <div class="box2 box"></div>
         </div>
         <div class="mainplayer1 gametwo">
-           <div class="mainbox mainbox2 p21" data-key="8">8</div>
+          <div class="mainbox mainbox2 p21" data-key="8">8</div>
           <div class="mainbox mainbox2 p22" data-key="9">9</div>
           <div class="mainbox mainbox2 p23" data-key="0">0</div>
-          <div class="mainbox mainbox2 p24" data-key="-" >-</div>
-           <div class="gameover gameover2">
+          <div class="mainbox mainbox2 p24" data-key="-">-</div>
+          <div class="gameover gameover2">
             <p>GAME OVER</p>
           </div>
         </div>
@@ -95,7 +94,7 @@
           <p id="player1_gamename">THEJAS BK</p>
         </div>
         <div class="centericon">
-          <button class="endbtn">END</button>     
+          <button class="endbtn">END</button>
         </div>
         <div class="name .nametwo">
           <p id="player2_gamename">THEJAS BK</p>
@@ -108,18 +107,16 @@
         <div class="resplayer1">
           <p class="solved1"><span id="player1_resname">player1</span></p>
           <p class="solved" id="player1solved">6</p>
-
         </div>
         <div class="resplayer2">
-          <p class="solved1"><span id="player2_resname">player2</span> </p>
+          <p class="solved1"><span id="player2_resname">player2</span></p>
           <p class="solved" id="player2solved">6</p>
-  
         </div>
-      </div>  
-     <div class="foot">
-        <button class="home">Home</button>
-  
       </div>
+      <div class="foot">
+        <button class="home">Home</button>
+      </div>
+    </div>
     <script src="simon.js"></script>
   </body>
 </html>
