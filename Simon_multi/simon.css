@@ -346,6 +346,16 @@ main .footer {
   main .gamsection .mainplayer1 {
     gap: 2rem;
   }
+  .timeANDhearts .time {
+    font-size: 1.5rem;
+  }
+  .homepage .startbtn .homepage-startbtn {
+    padding: 0.75rem;
+    margin-top: -1.25rem;
+  }
+  .timeANDhearts .hearts .heartone {
+    margin-left: 2rem;
+  }
 }
 @media (max-width: 790px) {
   main .gamesection .mainplayer1 {
@@ -359,6 +369,9 @@ main .footer {
   }
   .timeANDhearts .hearts .hearttwo {
     margin-right: 1rem;
+  }
+  .timeANDhearts .time {
+    color: white;
   }
 }
 @media (max-width: 450px) {
@@ -380,5 +393,10 @@ main .footer {
   }
   .footer .name p {
     letter-spacing: 0.05rem;
+  }
+}
+@media (max-width: 230px) {
+  .homepage {
+    width: 50%;
   }
 }
