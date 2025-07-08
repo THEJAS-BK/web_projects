@@ -44,16 +44,17 @@
 
     <main>
       <div class="keyToStart">
-        <div class="keyStart">
+        <div class="keyStart startmsg">
           Press space key to start
         </div>
       </div>
       <div class="gamesection">
         <div class="mainplayer1 gameone">
-          <div class="mainbox mainbox1 p11">1</div>
-          <div class="mainbox mainbox1 p12">2</div>
-          <div class="mainbox mainbox1 p13">3</div>
-          <div class="mainbox mainbox1 p14">4</div>
+          <div class="mainbox mainbox1 p11" data-key="1">1</div>
+          <div class="mainbox mainbox1 p12" data-key="2">2</div>
+          <div class="mainbox mainbox1 p13" data-key="3">3</div>
+          <div class="mainbox mainbox1 p14" data-key="4">4</div>
+
           <div class="gameover gameover1">
             <p>GAME OVER</p>
           </div>
@@ -65,10 +66,11 @@
           <div class="box2 box"></div>
         </div>
         <div class="mainplayer1 gametwo">
-          <div class="mainbox mainbox2 p21">8</div>
-          <div class="mainbox mainbox2 p22">9</div>
-          <div class="mainbox mainbox2 p23">0</div>
-          <div class="mainbox mainbox2 p24">-</div>  <div class="gameover gameover2">
+           <div class="mainbox mainbox2 p21" data-key="8">8</div>
+          <div class="mainbox mainbox2 p22" data-key="9">9</div>
+          <div class="mainbox mainbox2 p23" data-key="0">0</div>
+          <div class="mainbox mainbox2 p24" data-key="-" >-</div>
+           <div class="gameover gameover2">
             <p>GAME OVER</p>
           </div>
         </div>
@@ -89,13 +91,13 @@
         </div>
       </div>
       <div class="footer">
-        <div class="name">
+        <div class="name .nameone">
           <p id="player1_gamename">THEJAS BK</p>
         </div>
         <div class="centericon">
           <button class="endbtn">END</button>     
         </div>
-        <div class="name">
+        <div class="name .nametwo">
           <p id="player2_gamename">THEJAS BK</p>
         </div>
       </div>

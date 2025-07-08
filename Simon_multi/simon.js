@@ -15,6 +15,10 @@ let player1_box = document.querySelector(".box1");
 let player2_box = document.querySelector(".box2");
 let player1_num = 0;
 let player2_num = 0;
+function isTouchDevice() {
+  return "ontouchstart" in window || navigator.maxTouchPoints > 0;
+}
+
 homestartbtn.addEventListener("click", () => {
   if (player1.value != "" && player2.value != "") {
     players_Gamenames();
@@ -81,7 +85,45 @@ const legalkeys1 = ["1", "2", "3", "4"];
 const legalkeys2 = ["9", "8", "0", "-"];
 
 function gameSection() {
-  body.addEventListener("keydown", startGameOnce);
+  if (isTouchDevice()) {
+    document.querySelector(".startmsg").innerText = "Tap anywhere to start";
+    setupTouchControls();
+  } else {
+    body.addEventListener("keydown", startGameOnce);
+  }
+}
+function startGameOnceTouch() {
+  presskey.classList.add("DisplayNone");
+  start = true;
+  levelup();
+  if (clockstatus === true) clockTime();
+}
+
+function setupTouchControls() {
+  body.addEventListener("touchstart", startGameOnceTouch, { once: true });
+
+  let allButtons = document.querySelectorAll(".mainbox1, .mainbox2");
+  allButtons.forEach((btn) => {
+    btn.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      if (!start) return;
+
+      const key = btn.getAttribute("data-key");
+      console.log(key);
+
+      if (legalkeys1.includes(key) && !player1_gameover) {
+        flashgreen(btn);
+        player1_series.push(btn.innerText);
+        player1_test();
+      }
+
+      if (legalkeys2.includes(key) && !player2_gameover) {
+        flashgreen(btn);
+        player2_series.push(btn.innerText);
+        player2_test();
+      }
+    });
+  });
 }
 
 function startGameOnce(ev) {
@@ -400,7 +442,6 @@ function player1_centerboxes() {
 function remove_centerboxes(box) {
   allbtns = document.querySelectorAll(".player1_centerbox");
   allbtns.forEach((el) => {
-    console.log(el);
     box.removeChild(el);
   });
 }
