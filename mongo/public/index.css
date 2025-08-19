@@ -1,0 +1,12 @@
+.chats {
+  background-color: lightblue;
+  padding: 1.7rem;
+  border-radius: 3rem;
+  display: inline-block;
+}
+.msg {
+  background-color: aquamarine;
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: 0 0 4px black;
+}
