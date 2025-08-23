@@ -1,5 +1,14 @@
+body {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.container {
+  flex: 1;
+}
 .navbar {
-  height: 5rem;
+  min-height: 5rem;
   background-color: white;
 }
 .fa-compass {
@@ -12,9 +21,6 @@
 /*?footer style*/
 u {
   text-decoration: none;
-}
-a {
-  text-decoration: underline blue;
 }
 .f-info-links a {
   text-decoration: none;
@@ -41,4 +47,59 @@ a {
 .f-infosocial i {
   margin-left: 1rem;
   font-size: 1.25rem;
+}
+/* Cards */
+.card-body {
+  padding: 0;
+}
+.card {
+  border: none;
+  margin-bottom: 2rem;
+}
+.card-img-top {
+  border-radius: 1rem;
+  width: 100% !important;
+  object-fit: cover !important;
+}
+.card-text {
+  font-weight: 600;
+}
+.listing-Link {
+  text-decoration: none;
+  color: black;
+}
+/* Card effect  */
+.card-img-overlay {
+  opacity: 0;
+}
+.card-img-overlay:hover {
+  opacity: 0.2;
+  background-color: white;
+}
+/* new.ejs page  */
+.add-btn {
+  background-color: #fe423d;
+  border: none;
+  box-shadow: 0 0 4px black;
+}
+/* edit page  */
+.edit-btn {
+  background-color: #fe423d;
+  border: none;
+  box-shadow: 0 0 4px black;
+}
+
+/* show page  */
+.show-image {
+  height: 40vh;
+}
+.btns {
+  display: flex;
+}
+.edit-btn {
+  background-color: #fe423d;
+}
+.show-card {
+  padding-left: 0;
+  padding-right: 0;
 }

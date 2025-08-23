@@ -1,10 +1,25 @@
 <%layout("/layouts/boilerplate.ejs")%>
 <body>
-  <%for(let listings of allListings){%>
-  <u>
-    <li>
-      <a href="/listings/<%=listings._id%>">Title : <%=listings.title%></a>
-    </li>
+  <div class="row row-cols-xxl-3 row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+    <%for(let listings of allListings){%>
+    <a method="get" href="/listings/<%=listings._id%>" class="listing-Link">
+      <div class="card col">
+        <img
+          src="<%=listings.image%>"
+          class="card-img-top"
+          alt="listing_image"
+          style="height: 20rem"
+        />
+        <div class="card-img-overlay"></div>
+        <div class="card-body">
+          <p class="card-text">
+            <b><%=listings.title%></b>
+            <br />
+            &#8377;<%=listings.price%>/night
+          </p>
+        </div>
+      </div>
+    </a>
     <%}%>
-  </u>
+  </div>
 </body>

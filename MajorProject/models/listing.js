@@ -8,8 +8,8 @@ const listingSchema = new mongoose.Schema({
   description: String,
   image: {
     type: String,
-    set: (v) => (v === "" ? "/images/Default_house.jpeg" : v),
-    default: "/images/Default_house.jpeg",
+    default:
+      "https://unsplash.com/photos/a-white-house-with-a-porch-and-trees-tOAooVhQQzk",
   },
   price: Number,
   location: String,
