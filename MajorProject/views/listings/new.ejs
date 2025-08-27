@@ -3,7 +3,7 @@
   <div class="col-8 offset-2">
     <h3><b>Create a new listing</b></h3>
 
-    <form method="post" action="/listings">
+    <form method="post" novalidate class="needs-validation" action="/listings">
       <div class="mb-3">
         <label for="title" class="form-label">Enter title</label>
         <input
@@ -11,7 +11,10 @@
           class="form-control"
           placeholder="Enter title"
           type="text"
+          required
         />
+        <div class="valid-feedback">Title looks good</div>
+        <div class="invalid-feedback">Title is required</div>
       </div>
 
       <div class="mb-3">
@@ -21,6 +24,7 @@
           placeholder="Enter description"
           type="text"
           class="form-control"
+          required
         ></textarea>
       </div>
 
@@ -33,15 +37,17 @@
           type="text"
         />
       </div>
+
       <div class="row">
         <div class="mb-3 col-md-4">
           <label for="price" class="form-label">Enter price</label>
           <input
             name="listing[price]"
             placeholder="1200"
-            type="number"
             class="form-control"
+            required
           />
+          <div class="invalid-feedback">Enter a valid price</div>
         </div>
 
         <div class="mb-3 col-md-8">
@@ -51,7 +57,9 @@
             name="listing[country]"
             placeholder="Enter country"
             class="form-control"
+            required
           />
+          <div class="invalid-feedback">Enter country</div>
         </div>
       </div>
       <div class="mb-3">
@@ -61,7 +69,9 @@
           placeholder="udupi, Karnataka"
           type="text"
           class="form-control"
+          required
         />
+        <div class="invalid-feedback">please enter a valid location</div>
       </div>
       <br />
       <br />
