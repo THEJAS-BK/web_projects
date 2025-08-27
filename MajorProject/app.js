@@ -7,6 +7,7 @@ const Listing = require("./models/listing.js");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./util/wrapAsync.js");
 const ExpressError = require("./util/ExpressError.js");
+const { listingSchema } = require("./schema.js");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -25,6 +26,16 @@ async function main() {
   await mongoose.connect("mongodb://127.0.0.1:27017/wanderlust");
 }
 
+const validateListing = (req, res, next) => {
+  let { error } = listingSchema.validate(req.body);
+  if (error) {
+    let errMsg = error.details[0].message;
+    console.log(errMsg);
+    throw new ExpressError(400, errMsg);
+  } else {
+    next();
+  }
+};
 //?routes
 app.get("/", (req, res) => {
   res.send("Hi, I am root");
@@ -53,10 +64,8 @@ app.get(
 //Create route
 app.post(
   "/listings",
+  validateListing,
   wrapAsync(async (req, res, next) => {
-    if (!req.body.listing) {
-      throw new ExpressError(400, "Send a valid data");
-    }
     let listing = req.body.listing;
     const newListing = new Listing(listing);
     await newListing.save();
@@ -74,6 +83,7 @@ app.get(
 );
 app.put(
   "/listings/:id",
+  validateListing,
   wrapAsync(async (req, res, next) => {
     if (!req.body.listing) {
       new ExpressError(400, "send valid data");
@@ -99,7 +109,7 @@ app.all("/*splat", (req, res, next) => {
 });
 app.use((err, req, res, next) => {
   let { status = 500, message = "Something went Wrong" } = err;
-  res.status(status).send(message);
+  res.status(status).render("error.ejs", { err });
 });
 app.listen(8080, () => {
   console.log("Server started");
