@@ -30,7 +30,6 @@ const validateListing = (req, res, next) => {
   let { error } = listingSchema.validate(req.body);
   if (error) {
     let errMsg = error.details[0].message;
-    console.log(errMsg);
     throw new ExpressError(400, errMsg);
   } else {
     next();
@@ -43,7 +42,7 @@ app.get("/", (req, res) => {
 //index route
 app.get(
   "/listings",
-  wrapAsync(async (req, res, next) => {
+  wrapAsync(async (req, res) => {
     let allListings = await Listing.find({});
     res.render("listings/index.ejs", { allListings });
   })
@@ -65,7 +64,7 @@ app.get(
 app.post(
   "/listings",
   validateListing,
-  wrapAsync(async (req, res, next) => {
+  wrapAsync(async (req, res) => {
     let listing = req.body.listing;
     const newListing = new Listing(listing);
     await newListing.save();
@@ -84,7 +83,7 @@ app.get(
 app.put(
   "/listings/:id",
   validateListing,
-  wrapAsync(async (req, res, next) => {
+  wrapAsync(async (req, res) => {
     if (!req.body.listing) {
       new ExpressError(400, "send valid data");
     }
