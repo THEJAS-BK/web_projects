@@ -2,14 +2,12 @@
 
 <div class="row offset-2 mt-4">
   <div class="col-8">
-<h3 >Listing Details</h3>
+     <h2><b><%=listing.title%></b></h2>
 </div>
 <div class="card mb-3 col-8 show-card">
   <img src="<%=listing.image%>" class="card-img-top show-image" alt="Missing image" />
   <div class="card-body">
-
-    <div class="class-text"> 
-      <b><%=listing.title%></b>
+    <div class="class-text">  
 <br>
   <%=listing.description%>
   <br>
@@ -18,17 +16,53 @@
   <%=listing.location%>
   <br>
   <%=listing.country%>
-
 </p>
 </div></div>
-
-
 </div>
   <div class="btns mb-4" style="padding-left:0">
   <a href="/listings/<%=listing._id%>/edit" class="btn btn-dark col-1 edit-btn">Edit</a>
 <form method="post" action="/listings/<%=listing._id%>?_method=delete">
   <button class="btn btn-dark offset-4">Delete</button>
 </form>
+</div>
+<hr>
+<div class="col-8">
+  <h4>Leave a review</h4>
+  <form method="post" action="/listings/<%=listing._id%>/reviews" novalidate class="needs-validation">
+    <label for="rating" class="form-label">Rating</label>
+    <br>
+    <input type="range" min="1" max="5" class="form-range" name="review[rating]" id="rating">
+    <div >
+      <label for="comment" class="form-label">Comment</label>
+      <textarea name="review[comment]" required class="form-control" id="comment" col
+      s="8" rows="7"></textarea>
+      <div class="valid-feedback">
+        This is valid
+      </div>
+      <div class="invalid-feedback">
+        Please Fill the fields
+      </div>
+    </div>
+    <br><br>
+
+<button class="btn btn-dark">Submit</button>
+  </form>
+  <hr>
+  <h3>All Reviews</h3>
+  <br>
+<div class="row">
+    <%for(review of listing.reviews){%>
+      <div class="card col-5 ms-3 mb-3">
+        <div class="card-body">
+          <div class="card-title">Drake</div>
+          <p class="card-text"><%=review.comment%></p>
+          <p class="card-text"><%=review.rating%></p>
+        </div>
+        <br>
+
+      </div>
+    <%}%>
+</div>
 </div>
 
 </div>
