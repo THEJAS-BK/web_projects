@@ -120,11 +120,20 @@ app.post(
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     let listings = await Listing.findById(id);
-    console.log(listings);
     let newReview = new Review(req.body.review);
     listings.reviews.push(newReview);
     await newReview.save();
     await listings.save();
+    res.redirect(`/listings/${id}`);
+  })
+);
+//Reviews delete route
+app.delete(
+  "/listings/:id/reviews/:reviewId",
+  wrapAsync(async (req, res) => {
+    let { id, reviewId } = req.params;
+    await Listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
+    await Review.findByIdAndDelete(reviewId);
     res.redirect(`/listings/${id}`);
   })
 );
