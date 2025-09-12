@@ -8,8 +8,8 @@ const ExpressError = require("./util/ExpressError.js");
 const listingRoute = require("./routes/listing.js");
 const reviewRoute = require("./routes/review.js");
 const session = require("express-session");
+const flash = require("connect-flash");
 
-app.use(session({ secret: "mysecretcode" }));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
@@ -26,16 +26,31 @@ main()
 async function main() {
   await mongoose.connect("mongodb://127.0.0.1:27017/wanderlust");
 }
-
-app.get("/test", (req, res) => {
-  res.send("Yolo");
-});
-
-//?routes
+const sessionOptions = {
+  secret: "mysupersecretcode",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    httpOnly: true,
+  },
+};
 app.get("/", (req, res) => {
   res.send("Hi, I am root");
 });
+app.use(session(sessionOptions));
+app.use(flash());
 
+app.use((req, res, next) => {
+  res.locals.success = req.flash("Success");
+  next();
+});
+app.use((req, res, next) => {
+  res.locals.failure = req.flash("failure");
+  next();
+});
+//!routes
 app.use("/listings", listingRoute);
 app.use("/listings/:id/reviews", reviewRoute);
 
