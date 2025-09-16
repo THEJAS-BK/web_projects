@@ -33,7 +33,7 @@ router.get(
     let { id } = req.params;
     const listing = await Listing.findById(id).populate("reviews");
     if (!listing) {
-      req.flash("failure", "Page has been deleted");
+      req.flash("error", "Page has been deleted");
       return res.redirect("/listings");
     }
     res.render("listings/show.ejs", { listing });
@@ -58,7 +58,7 @@ router.get(
     let { id } = req.params;
     let listing = await Listing.findById(id);
     if (!listing) {
-      req.flash("failure", "this page does not exist");
+      req.flash("error", "this page does not exist");
       return res.redirect("/listings");
     }
     res.render("listings/edit.ejs", { listing });
