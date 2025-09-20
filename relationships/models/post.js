@@ -42,4 +42,14 @@ const saveData = async () => {
   await user1.save();
   await post1.save();
 };
-saveData();
+
+const saveW = async () => {
+  let user = await User.findOne({ username: "mrX1234" });
+  let post2 = new Post({
+    content: "e4,e5",
+    likes: 5,
+  });
+  post2.user = user;
+  post2.save();
+};
+saveW();

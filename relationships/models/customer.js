@@ -11,30 +11,11 @@ main()
 async function main() {
   await mongoose.connect("mongodb://127.0.0.1:27017/relationDemo");
 }
+
 const orderSchema = new mongoose.Schema({
   item: String,
   price: Number,
 });
-const Order = mongoose.model("Order", orderSchema);
-
-// const addOrders = async () => {
-//   await Order.insertMany([
-//     {
-//       item: "chocolate",
-//       price: 100,
-//     },
-
-//     {
-//       item: "Strawberry",
-//       price: 50,
-//     },
-//     {
-//       item: "Apple",
-//       price: 60,
-//     },
-//   ]);
-// };
-// addOrders();
 
 const customerSchema = new mongoose.Schema({
   name: String,
@@ -45,22 +26,34 @@ const customerSchema = new mongoose.Schema({
     },
   ],
 });
+const Order = mongoose.model("Order", orderSchema);
+// customerSchema.pre("findOneAndDelete", async function () {
+//   console.log("PRE MIDDLEWARE");
+// });
+customerSchema.post("findOneAndDelete", async function (data) {
+  console.log(data);
+  if (data.orders.length > 0) {
+    let result = await Order.deleteMany({ _id: { $in: data.orders } });
+    console.log(result);
+  }
+});
 const Customer = mongoose.model("Customer", customerSchema);
 
-// const addCustomer = async () => {
-//   let cus1 = new Customer({
-//     name: "Billy",
-//   });
-//   let order1 = await Order.findOne({ item: "chocolate" });
-//   let order2 = await Order.findOne({ item: "Strawberry" });
-//   cus1.orders.push(order1);
-//   cus1.orders.push(order2);
-//   let result = await cus1.save();
-//   console.log(result);
-// };
-// addCustomer();
-const findCustomer = async () => {
-  let res = await Customer.findOne({ name: "Billy" }).populate("orders");
-  console.log(res);
+const addCust = async () => {
+  let newcust = new Customer({
+    name: "Archer",
+  });
+  let newOrder = new Order({
+    item: "thing",
+    price: 150,
+  });
+  newcust.orders.push(newOrder);
+  await newOrder.save();
+  await newcust.save();
 };
-findCustomer();
+
+const deleteCust = async () => {
+  let data = await Customer.findByIdAndDelete("68ba80ba1338a8f5ac60e4cc");
+  console.log(data);
+};
+deleteCust();
