@@ -1,19 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const wrapAsync = require("../util/wrapAsync");
-const ExpressError = require("../util/ExpressError");
-const { listingSchema } = require("../schema.js");
 const Listing = require("../models/listing.js");
+const { isLoggedIn } = require("../middleware.js");
+const { isOwner, validateListing } = require("../middleware");
 
-const validateListing = (req, res, next) => {
-  let { error } = listingSchema.validate(req.body);
-  if (error) {
-    let errMsg = error.details[0].message;
-    throw new ExpressError(400, errMsg);
-  } else {
-    next();
-  }
-};
 //index route
 router.get(
   "/",
@@ -23,7 +14,7 @@ router.get(
   })
 );
 //new route
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
   res.render("listings/new.ejs");
 });
 //show route
@@ -31,7 +22,9 @@ router.get(
   "/:id",
   wrapAsync(async (req, res) => {
     let { id } = req.params;
-    const listing = await Listing.findById(id).populate("reviews");
+    const listing = await Listing.findById(id)
+      .populate({ path: "reviews", populate: "author" })
+      .populate("owner");
     if (!listing) {
       req.flash("error", "Page has been deleted");
       return res.redirect("/listings");
@@ -42,6 +35,7 @@ router.get(
 //Create route
 router.post(
   "/",
+  isLoggedIn,
   validateListing,
   wrapAsync(async (req, res) => {
     let listing = req.body.listing;
@@ -54,6 +48,8 @@ router.post(
 //update route
 router.get(
   "/:id/edit",
+  isOwner,
+  isLoggedIn,
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     let listing = await Listing.findById(id);
@@ -66,6 +62,8 @@ router.get(
 );
 router.put(
   "/:id",
+  isLoggedIn,
+  isOwner,
   validateListing,
   wrapAsync(async (req, res) => {
     if (!req.body.listing) {
@@ -81,6 +79,8 @@ router.put(
 //delete `route`
 router.delete(
   "/:id",
+  isLoggedIn,
+  isOwner,
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     await Listing.findByIdAndDelete(id);

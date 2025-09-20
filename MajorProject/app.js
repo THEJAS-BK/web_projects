@@ -57,6 +57,11 @@ app.use((req, res, next) => {
   res.locals.failure = req.flash("error");
   next();
 });
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  next();
+});
+
 //!routes
 
 // app.get("/demouser", async (req, res) => {
