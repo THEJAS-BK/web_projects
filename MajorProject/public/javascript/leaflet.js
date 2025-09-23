@@ -1,5 +1,5 @@
 let lat, long;
-fetch(`https://nominatim.openstreetmap.org/search?format=json&q=udupi`)
+fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${loc}`)
   .then((res) => res.json())
   .then((data) => {
     lat = data[0].lat;
