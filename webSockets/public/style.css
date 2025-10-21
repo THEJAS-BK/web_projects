@@ -1,0 +1,50 @@
+.mainContent {
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  align-items: center;
+}
+.chatArea {
+  width: 80%;
+  height: 70%;
+  background-color: lightblue;
+  overflow: auto;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  height: 10%;
+}
+
+.messageArea,
+.roomArea {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10%;
+}
+.messageArea {
+  height: 100%;
+}
+
+.inpStyle {
+  width: 60%;
+  height: 60%;
+  outline: none;
+  border-radius: 2rem;
+  text-align: center;
+  font-size: 1rem;
+}
+.btnStyle {
+  width: 5rem;
+  height: 68%;
+  outline: none;
+  border-radius: 2rem;
+}
+.chatArea p {
+  background-color: lightgray;
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="mainContent">
+      <div class="chatArea"></div>
+      <form action="">
+        <div class="messageArea">
+          <input type="text" name="" id="messageInp" class="inpStyle" />
+          <button class="btnStyle btnSubmit">send</button>
+        </div>
+      </form>
+      <div class="roomArea">
+        <input type="text" name="" id="roomInp" class="inpStyle" />
+        <button class="btnStyle roomSubmit">Join</button>
+      </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/script.js"></script>
+  </body>
+</html>
