@@ -1,0 +1,26 @@
+GET http://localhost:8080/posts HTTP/1.1
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGhlamFzIiwiaWF0IjoxNzYxMTMwNTU3LCJleHAiOjE3NjExMzA1NzJ9.BqH33u0EbVG0ITsCzDL1U5gBkbrHO5XKySzm7faZG1I
+###
+POST http://localhost:8081/token HTTP/1.1
+Content-Type: application/json
+
+{
+    "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGhlamFzIiwiaWF0IjoxNzYxMTMwNTU3fQ.ZCCspnnHMUyfLsxDHlu3ezLgWRtSnYqMYMCMTG1M88g"
+}
+###
+DELETE http://localhost:8081/logout  HTTP/1.1
+Content-Content-Type: application/json
+
+{
+    "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGhlamFzIiwiaWF0IjoxNzYxMTMwNTk3LCJleHAiOjE3NjExMzA2MTJ9.MSHq1zlnIcpV6IIecqz2acrKiSe2-XQV6eY_2ZCXjG8"
+}
+
+
+
+###
+POST http://localhost:8081/login HTTP/1.1
+Content-Type:application/json
+
+{
+    "username":"thejas"
+}
