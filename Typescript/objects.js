@@ -7,5 +7,9 @@ var user = {
 };
 function createUser(_a) {
     var name = _a.name, email = _a.email, isActive = _a.isActive;
+    return { name: "thejas" };
 }
 createUser(user);
+function getUser(user) {
+    console.log("hello", user.name);
+}
