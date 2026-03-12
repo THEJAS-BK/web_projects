@@ -13,4 +13,15 @@ declare class SubUser extends User {
     changeCourse(): void;
 }
 declare const userOne: User;
+interface TakePhoto {
+    camera: string;
+    model: string;
+    brust: number;
+}
+declare class Instagram implements TakePhoto {
+    camera: string;
+    model: string;
+    brust: number;
+    constructor(camera: string, model: string, brust: number);
+}
 //# sourceMappingURL=index.d.ts.map

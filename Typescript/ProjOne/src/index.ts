@@ -50,3 +50,21 @@ class SubUser extends User{
 const userOne = new User("thejasbk1@gmail.com","thejas",45324)
 
 userOne.setCounter=90;
+
+
+//more on interfaces
+interface TakePhoto{
+    camera:string
+    model:string
+    brust:number
+}
+
+class Instagram implements TakePhoto{
+    constructor(
+        public camera:string,
+        public model:string,
+        public brust:number
+    ) {
+        
+    }
+}

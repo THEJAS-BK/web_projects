@@ -41,4 +41,11 @@ class SubUser extends User {
 }
 const userOne = new User("thejasbk1@gmail.com", "thejas", 45324);
 userOne.setCounter = 90;
+class Instagram {
+    constructor(camera, model, brust) {
+        this.camera = camera;
+        this.model = model;
+        this.brust = brust;
+    }
+}
 //# sourceMappingURL=index.js.map
