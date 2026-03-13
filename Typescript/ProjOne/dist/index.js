@@ -93,9 +93,62 @@ identityFour(45);
 identityFour({ brand: "brand", type: "type" });
 function getSearchProducts(products) {
     const Index = 3;
-    return products[Index];
+    return products;
 }
 const getMoreSearchProducts = (products, i) => {
     return products[i];
 };
+//generic classes
+function funcTwo(val, val1) {
+    return {};
+}
+funcTwo(3, 45);
+class Sellable {
+    constructor() {
+        this.cart = [];
+    }
+    addToCard(products) {
+        this.cart.push(products);
+    }
+}
+//Type narrowing
+function detectType(val) {
+    if (typeof val === "string") {
+        return val.toLowerCase();
+    }
+    return 45;
+}
+function isAdminAcc(acc) {
+    if ("isAdmin" in acc) {
+        return acc.isAdmin;
+    }
+    return false;
+}
+isAdminAcc({ Onename: "John", email: "john@example.com" });
+function isFish(per) {
+    return per !== undefined;
+}
+function getFood(pet) {
+    if (isFish(pet)) {
+        return pet.method();
+    }
+    throw new Error("Invalid pet type");
+}
+function getTrueShape(shape) {
+    if (shape.kind === "circle") {
+        return Math.PI * Math.pow(shape.rad, 2);
+    }
+}
+//exhaustive
+function getArea(shape) {
+    switch (shape.kind) {
+        case "circle":
+            return Math.PI * Math.pow(shape.rad, 2);
+        case "square":
+            return Math.PI * shape.side * shape.side;
+        default:
+            const _defaultForShape = shape;
+            return _defaultForShape;
+    }
+}
 //# sourceMappingURL=index.js.map
