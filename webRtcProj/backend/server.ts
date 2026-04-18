@@ -2,6 +2,7 @@ import  express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import cors from "cors"
+import e from "express";
 
 const app = express();
 app.use(cors(
@@ -23,8 +24,22 @@ io.on("connection",(socket)=>{
 
     socket.on("join-room",(roomId,UserId)=>{
         socket.join(roomId);
-        io.to(roomId).emit("joined-room",UserId);
+        socket.to(roomId).emit("user-joined",UserId);
     })
+
+    socket.on("offer",({offer,to})=>{
+        io.to(to).emit("offer",{
+            offer,
+            from:socket.id
+        })
+    })
+
+      socket.on("answer", ({ answer, to }) => {
+    io.to(to).emit("answer", {
+      answer,
+      from: socket.id,
+    });
+  });
 })
 
 httpServer.listen(8080,()=>{
