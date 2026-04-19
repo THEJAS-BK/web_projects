@@ -40,6 +40,12 @@ io.on("connection",(socket)=>{
       from: socket.id,
     });
   });
+  socket.on("ice-candidate",({candidate,to})=>{
+    io.to(to).emit("ice-candidate",{
+        candidate,
+        from:socket.id
+    })
+  })
 })
 
 httpServer.listen(8080,()=>{
